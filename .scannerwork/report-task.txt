@@ -2,5 +2,5 @@ projectKey=dimsumlepos
 serverUrl=http://localhost:9000
 serverVersion=26.5.0.122743
 dashboardUrl=http://localhost:9000/dashboard?id=dimsumlepos
-ceTaskId=ac74b194-0983-4fc3-ae01-0be23784a516
-ceTaskUrl=http://localhost:9000/api/ce/task?id=ac74b194-0983-4fc3-ae01-0be23784a516
+ceTaskId=42ef8519-af20-4d47-989f-d7c6b8329029
+ceTaskUrl=http://localhost:9000/api/ce/task?id=42ef8519-af20-4d47-989f-d7c6b8329029

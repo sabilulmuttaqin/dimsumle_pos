@@ -18,4 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'edit']);
     Route::resource('products', ProductController::class)->except(['create', 'edit']);
     Route::resource('expenses', ExpenseController::class)->except(['create', 'edit']);
+    Route::get('/pos', [POSController::class, 'index'])->name('pos.index');
+    Route::post('/pos', [POSController::class, 'store'])->name('pos.store');
 });

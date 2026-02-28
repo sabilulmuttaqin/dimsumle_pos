@@ -13,3 +13,10 @@ Selesai: 21 Februari 2026
 Us-008 KelolaPengeluaran
 Mulai: 22 Februari 2026
 Selesai: 23 Februari 2026
+
+--- Demo owner 24 Februari 2026 ---
+
+US-001 Transaksi
+Mulai: 25 Februari 2026
+Selesai: 28 Februari 2026
+

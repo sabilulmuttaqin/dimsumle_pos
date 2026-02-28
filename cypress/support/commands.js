@@ -11,7 +11,7 @@ Cypress.Commands.add(
 
 Cypress.Commands.add(
     "loginKasir",
-    (email = "kasir1@gmail.com", password = "akunkasir") => {
+    (email = "kasir@gmail.com", password = "akunkasir") => {
         cy.visit("/");
         cy.get("#email").clear().type(email);
         cy.get("#password").clear().type(password);

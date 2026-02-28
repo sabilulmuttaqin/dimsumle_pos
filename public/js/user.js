@@ -60,7 +60,8 @@ function userPage() {
         },
 
         getCsrfToken() {
-            return document.querySelector('meta[name="csrf-token"]').content;
+            const meta = document.querySelector('meta[name="csrf-token"]');
+            return meta ? meta.content : '';
         },
 
         reloadPage() {

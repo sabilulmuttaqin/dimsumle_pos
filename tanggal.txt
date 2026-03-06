@@ -20,7 +20,11 @@ US-001 Transaksi
 Mulai: 25 Februari 2026
 Selesai: 28 Februari 2026
 
-US-006 Notifikasi Stok Rendah
+US-006 Notif
 Mulai: 1 Maret 2026
 Selesai: 2 Maret 2026
+
+US-002 RiwayatTransaksi
+Mulai: 3 Maret 2026
+Selesai: 6 Maret 2026
 

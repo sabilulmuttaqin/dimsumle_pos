@@ -57,6 +57,13 @@ class POSController extends Controller
                 ]);
                 foreach ($request->cart as $item) {
                     Product::find($item['id'])->decrement('stock', $item['quantity']);
+                    TransactionDetail::create([
+                        'pos_id'     => $transaction->id,
+                        'product_id' => $item['id'],
+                        'quantity'   => $item['quantity'],
+                        'price'      => $item['price'],
+                        'subtotal'   => $item['subtotal'],
+                    ]);
                 }
                 return $transaction;
             });

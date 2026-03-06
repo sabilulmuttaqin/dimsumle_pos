@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransactionDetail;
 
 class POS extends Model
 {
@@ -23,6 +24,11 @@ class POS extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(TransactionDetail::class, 'pos_id');
     }
 
     protected static function boot()

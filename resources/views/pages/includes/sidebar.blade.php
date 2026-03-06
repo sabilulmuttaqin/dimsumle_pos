@@ -53,6 +53,15 @@
                         </svg>
                         <span class="font-medium text-sm">Transaksi</span>
                     </a>
+                    <a href="{{ route('history.index') }}"
+                        class="sidebar-link flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('history.*') ? 'text-white bg-blue-600 hover:bg-blue-600 hover:text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                        <span class="font-medium text-sm">Riwayat Transaksi</span>
+                    </a>
                 @endif
             </div>
         </div>

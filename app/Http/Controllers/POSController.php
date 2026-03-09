@@ -81,4 +81,24 @@ class POSController extends Controller
             ], 500);
         }
     }
+    public function struk($id)
+    {
+        $transaction = POS::with(['details.product', 'user'])->findOrFail($id);
+
+        return view('pages.struk', [
+            'invoice'       => $transaction->invoice_number,
+            'date'          => $transaction->created_at->format('d M Y, H:i'),
+            'cashier'       => $transaction->user->name,
+        'items'         => $transaction->details->map(fn($item) => [
+            'name'     => $item->product->name,
+            'quantity' => $item->quantity,
+            'price'    => $item->price,
+            'subtotal' => $item->subtotal,
+        ]),
+        'total'         => $transaction->total,
+        'paid'          => $transaction->paid_amount,
+        'change'        => $transaction->change_amount,
+        'paymentMethod' => ucfirst($transaction->payment_method),
+    ]);
+}
 }

@@ -301,7 +301,10 @@
                         <p class="text-xl font-bold text-slate-900" x-text="lastInvoice"></p>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <button type="button" 
+                        <button type="button" @click="
+                            let frame = document.getElementById('struk-frame');
+                            frame.src = '/struk/' + selectedTransaction;
+                            frame.onload = () => frame.contentWindow.print();"
                             class="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                             Cetak Struk
                         </button>

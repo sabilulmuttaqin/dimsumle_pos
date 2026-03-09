@@ -28,3 +28,7 @@ US-002 RiwayatTransaksi
 Mulai: 3 Maret 2026
 Selesai: 6 Maret 2026
 
+US-003 Struk
+Mulai: 7 Maret 2026
+Selesai: 9 Maret 2026
+

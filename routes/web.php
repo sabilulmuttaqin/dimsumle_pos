@@ -24,4 +24,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
     Route::get('/history/{id}', [HistoryController::class, 'show'])->name('history.show');
     Route::delete('/history/{id}', [HistoryController::class, 'destroy'])->name('history.destroy');
+    Route::get('/struk/{id}', [POSController::class, 'struk']);
 });

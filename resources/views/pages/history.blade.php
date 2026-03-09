@@ -243,7 +243,15 @@
 
                 <!-- Footer -->
                 <div class="bg-slate-50 px-6 py-4 flex justify-end gap-3 border-t border-slate-200">
-                    <button type="button" @click="closeDetailModal()"
+                <button type="button" @click="
+                    let frame = document.getElementById('struk-frame');
+                    frame.src = '/struk/' + selectedTransaction.id;
+                    frame.onload = () => frame.contentWindow.print();
+                    "
+                        class="px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">
+                        Cetak
+                    </button>    
+                <button type="button" @click="closeDetailModal()"
                         class="px-4 py-2.5 border border-slate-300 text-slate-900 rounded-lg transition-colors text-sm">
                         Tutup
                     </button>

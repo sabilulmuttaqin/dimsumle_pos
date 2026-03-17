@@ -104,7 +104,16 @@
                         </path>
                     </svg>
                     <span class="font-medium text-sm">Laporan</span>
-                </a>
+                    </a>
+                    <a href="{{ route('customers.index') }}"
+                    class="sidebar-link flex items-center space-x-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('customers.*') ? 'text-white bg-blue-600 hover:bg-blue-600 hover:text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors' }}">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                        </path>
+                    </svg>
+                    <span class="font-medium text-sm">Pelanggan</span>
+                    </a>
                 </div>
             </div>
         @endif

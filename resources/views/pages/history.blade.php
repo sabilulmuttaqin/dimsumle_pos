@@ -57,13 +57,13 @@
                         <form action="{{ route('history.index') }}" method="GET" class="flex flex-col md:flex-row md:items-start space-y-3 md:space-y-0 md:space-x-3">
                             <div class="flex space-x-2">
                                 <div class="flex flex-col w-full">
-                                    <label class="text-xs font-medium text-slate-500 mb-1">Dari</label>
-                                    <input type="date" name="date_from" value="{{ request('date_from') }}"
+                                    <label for="date_from" class="text-xs font-medium text-slate-500 mb-1">Dari</label>
+                                    <input id="date_from" type="date" name="date_from" value="{{ request('date_from') }}"
                                         class="px-4 py-2.5 text-sm border border-slate-300 rounded-lg w-full md:w-auto focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 </div>
                                 <div class="flex flex-col w-full">
-                                    <label class="text-xs font-medium text-slate-500 mb-1">Sampai</label>
-                                    <input type="date" name="date_to" value="{{ request('date_to') }}"
+                                    <label for="date_to" class="text-xs font-medium text-slate-500 mb-1">Sampai</label>
+                                    <input id="date_to" type="date" name="date_to" value="{{ request('date_to') }}"
                                         class="px-4 py-2.5 text-sm border border-slate-300 rounded-lg w-full md:w-auto focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
             </div>
         </div>
     </div>
-<iframe id="struk-frame" style="display:none;"></iframe>
+<iframe id="struk-frame" title="struk" style="display:none;"></iframe>
     @include('pages.includes.deletemodal')
 </div>
 

@@ -37,3 +37,7 @@ Selesai: 9 Maret 2026
 US-009 LaporanBulanan
 Mulai: 11 Maret 2026
 Selesai: 15 Maret 2026
+
+US-012 Kelola Pelanggan
+Mulai: 16 Maret 2026
+Selesai: 17 Maret 2026

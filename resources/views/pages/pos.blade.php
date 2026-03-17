@@ -171,8 +171,8 @@
                     </div>
 
                     <!-- Payment Method -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Metode Pembayaran</label>
+                    <fieldset>
+                        <legend class="block text-sm font-medium text-slate-700 mb-2">Metode Pembayaran</legend>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" @click="paymentMethod = 'cash'"
                                 :class="paymentMethod === 'cash' ? 'border-blue-600 bg-slate-50' : 'border-slate-200 hover:border-slate-300'"
@@ -208,7 +208,7 @@
                                 <span class="text-xs font-medium">QRIS</span>
                             </button>
                         </div>
-                    </div>
+                    </fieldset>
                     
                     <!-- Amount Paid -->
                     <div>
@@ -314,7 +314,7 @@
         </div>
     </div>
     
-<iframe id="struk-frame" style="display:none;"></iframe>
+<iframe id="struk-frame" title="struk" style="display:none;"></iframe>
 </div>
 
 <style>[x-cloak] { display: none !important; }</style>

@@ -15,7 +15,7 @@
                     </svg>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-lg font-semibold text-slate-900 mb-2" x-text="deleteTitle"></h3>
+                    <h3 class="text-lg font-semibold text-slate-900 mb-2" x-text="deleteTitle">Hapus Data</h3>
                     <p class="text-sm text-slate-500" x-text="deleteDescription"></p>
                 </div>
                 <div class="mt-6 flex justify-center space-x-3">

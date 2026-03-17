@@ -118,7 +118,7 @@
                         <!-- Header -->
                         <div class="bg-white px-6 py-4 border-b border-slate-200">
                             <div class="flex items-center justify-between">
-                                <h3 class="text-lg font-semibold text-slate-900" x-text="isEdit ? 'Edit User' : 'Tambah User Baru'"></h3>
+                                <h3 class="text-lg font-semibold text-slate-900" x-text="isEdit ? 'Edit User' : 'Tambah User Baru'">Tambah User Baru</h3>
                                 <button type="button" @click="closeModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -131,10 +131,10 @@
                         <div class="bg-white px-6 py-4 space-y-4">
                             <!-- Nama -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                <label for="user-name" class="block text-sm font-medium text-slate-700 mb-2">
                                     Nama Lengkap <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" x-model="form.name"
+                                <input id="user-name" type="text" x-model="form.name"
                                     class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 <template x-if="errors.name">
                                     <p class="mt-1 text-xs text-red-600" x-text="errors.name[0]"></p>
@@ -143,10 +143,10 @@
     
                             <!-- Email -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                <label for="user-email" class="block text-sm font-medium text-slate-700 mb-2">
                                     Email <span class="text-red-500">*</span>
                                 </label>
-                                <input type="email" x-model="form.email"
+                                <input id="user-email" type="email" x-model="form.email"
                                     class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 <template x-if="errors.email">
                                     <p class="mt-1 text-xs text-red-600" x-text="errors.email[0]"></p>
@@ -155,10 +155,10 @@
     
                             <!-- Role -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                <label for="user-role" class="block text-sm font-medium text-slate-700 mb-2">
                                     Role <span class="text-red-500">*</span>
                                 </label>
-                                <select x-model="form.role"
+                                <select id="user-role" x-model="form.role"
                                     class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white">
                                     <option value="kasir">Kasir</option>
                                     <option value="admin">Owner</option>
@@ -170,13 +170,13 @@
     
                             <!-- Password -->
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-2">
+                                <label for="user-password" class="block text-sm font-medium text-slate-700 mb-2">
                                     Password <span x-show="!isEdit" class="text-red-500">*</span>
                                     <template x-if="isEdit">
                                         <span class="text-xs text-slate-500">(Kosongkan jika tidak ingin mengubah)</span>
                                     </template>
                                 </label>
-                                <input type="password" x-model="form.password"
+                                <input id="user-password" type="password" x-model="form.password"
                                     class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                                 <template x-if="errors.password">
                                     <p class="mt-1 text-xs text-red-600" x-text="errors.password[0]"></p>
@@ -212,8 +212,5 @@
     </div>
     
     <style>[x-cloak] { display: none !important; }</style>
-    
-    <script src="{{asset('js/user.js')}}">
-    
-    </script>
+    <script src="{{ asset('js/user.js') }}"></script>
     @endsection

@@ -51,7 +51,12 @@ class ReportController extends Controller
                 'transaction_count' => $product->transaction_count,
             ])->values(),
 
-            'topCustomers' => [],
+            'topCustomers' => $this->loadTopCustomers($start, $end, $cashier)
+                ->map(fn($customer) => [
+                    'name'              => $customer->customer_name,
+                    'transaction_count' => $customer->transaction_count,
+                    'total_spend'       => $customer->total_spend,
+                ])->values(),
         ]);
     }
 
@@ -141,5 +146,21 @@ class ReportController extends Controller
             DB::raw('SUM(transaction_details.subtotal) as total_sales'),
             DB::raw('COUNT(DISTINCT pos.id) as transaction_count')
         )->groupBy('products.id', 'products.name')->orderByDesc('total_sales')->get();
+    }
+    private function loadTopCustomers($start, $end, $cashier)
+    {
+        $query = DB::table('pos')
+            ->join('customers', 'pos.customer_id', '=', 'customers.id')
+            ->whereBetween('pos.updated_at', [$start, $end])
+            ->whereNotNull('pos.customer_id');
+        if ($cashier) {
+            $query->where('pos.user_id', $cashier);
+        }
+
+        return $query->select(
+            'customers.name as customer_name',
+            DB::raw('COUNT(pos.id) as transaction_count'),
+            DB::raw('SUM(pos.total) as total_spend')
+        )->groupBy('customers.id', 'customers.name')->orderByDesc('transaction_count')->limit(5)->get();
     }
 }

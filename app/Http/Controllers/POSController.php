@@ -7,6 +7,7 @@ use App\Models\POS;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Customer;
 
 class POSController extends Controller
 {
@@ -15,8 +16,9 @@ class POSController extends Controller
         $title = 'Transaksi';
         $subtitle = 'Catat transaksi lebih mudah';
         $products = Product::where('stock', '>', 0)->get();
+        $customers = Customer::all();
 
-        return view('pages.pos', compact('title', 'subtitle', 'products'));
+        return view('pages.pos', compact('title', 'subtitle', 'products', 'customers'));
     }
 
     public function store(Request $request)
@@ -30,6 +32,7 @@ class POSController extends Controller
             'cart.*.subtotal' => $numericRule,
             'paid_amount' => $numericRule,
             'payment_method' => 'required|in:cash,qris,transfer',
+            'customer_id' =>'nullable|exists:customers,id'
         ]);
 
         $total = 0;
@@ -51,6 +54,7 @@ class POSController extends Controller
                 $transaction = POS::create([
                     'user_id' => auth()->id(),
                     'total' => $total,
+                    'customer_id' => $request->customer_id,
                     'paid_amount' => $paidAmount,
                     'change_amount' => $changeAmount,
                     'payment_method' => $request->payment_method,

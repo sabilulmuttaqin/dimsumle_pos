@@ -66,6 +66,7 @@ class HistoryController extends Controller
         $transaction = POS::with([
             "details.product",
             "user",
+            'customer'
         ])->find($id);
         if (!$transaction) {
             return response()->json(
@@ -80,7 +81,7 @@ class HistoryController extends Controller
                 "invoice_number" => $transaction->invoice_number,
                 "created_at" => $transaction->created_at->format("d M Y, H:i"),
                 "user_name" => $transaction->user->name,
-                "customer_name" => null,
+                "customer_name" => $transaction->customer ? $transaction->customer->name : null,
                 "payment_method" => ucfirst($transaction->payment_method),
                 "subtotal" => $transaction->total,
                 "total" => $transaction->total,

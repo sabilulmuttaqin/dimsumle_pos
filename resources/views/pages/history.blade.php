@@ -199,6 +199,10 @@
                                 <p class="text-sm text-slate-500">Metode Pembayaran</p>
                                 <p class="font-semibold text-slate-900" x-text="selectedTransaction.payment_method"></p>
                             </div>
+                            <div>
+                                <p class="text-sm text-slate-500">Nama Pelanggan</p>
+                                <p class="font-semibold text-slate-900" x-text="selectedTransaction.customer_name ? selectedTransaction.customer_name : 'Tidak ada nama' "></p>
+                            </div>
                         </div>
 
                         <!-- Items -->

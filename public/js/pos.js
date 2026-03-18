@@ -11,6 +11,7 @@ function posPage() {
         showSuccessModal: false,
         lastInvoice: '',
         selectedTransaction: null,
+        customerId: '',
         loading: false,
         toast: { show: false, message: '' },
 

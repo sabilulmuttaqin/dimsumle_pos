@@ -209,6 +209,19 @@
                             </button>
                         </div>
                     </fieldset>
+
+                    <div>
+                        <label for="paid" class="block text-sm font-medium text-slate-700 mb-2">
+                            Pelanggan (Opsional)
+                        </label>
+                        <select x-model="customerId" class="w-full px-3 py-2 border border-slate-300 rounded-lg 
+                        focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm">
+                                    <option value="">Pilih Pelanggan</option>
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                    @endforeach
+                                </select>     
+                    </div>
                     
                     <!-- Amount Paid -->
                     <div>

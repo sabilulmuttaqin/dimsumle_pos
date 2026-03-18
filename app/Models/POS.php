@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\TransactionDetail;
+use App\Models\Customer;
 
 class POS extends Model
 {
@@ -19,6 +20,7 @@ class POS extends Model
         'paid_amount',
         'change_amount',
         'payment_method',
+        'customer_id'
     ];
 
     public function user()
@@ -49,5 +51,9 @@ class POS extends Model
                     );
             }
     });
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 }

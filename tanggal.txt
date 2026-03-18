@@ -38,6 +38,10 @@ US-009 LaporanBulanan
 Mulai: 11 Maret 2026
 Selesai: 15 Maret 2026
 
-US-012 Kelola Pelanggan
+US-012 KelolaPelanggan
 Mulai: 16 Maret 2026
 Selesai: 17 Maret 2026
+
+US-013 TransaksiPelanggan
+Mulai: 18 Maret 2026
+Selesai: 18 Maret 2026

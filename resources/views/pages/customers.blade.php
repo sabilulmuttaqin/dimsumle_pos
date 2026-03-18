@@ -41,9 +41,6 @@
                                         Nama Pelanggan</th>
                                     <th
                                         class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                                        Dibuat Pada</th>
-                                    <th
-                                        class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">
                                         Aksi</th>
                                 </tr>
                             </thead>
@@ -55,9 +52,6 @@
                                         </td>
                                         <td class="px-6 py-4 text-sm text-slate-900">
                                             {{ $customer->name }}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-slate-500">
-                                            {{ $customer->created_at->format('d M Y') }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center space-x-2">

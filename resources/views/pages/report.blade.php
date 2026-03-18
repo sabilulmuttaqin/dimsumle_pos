@@ -200,9 +200,20 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-slate-200">
-                                    <tr>
-                                        <td colspan="3" class="px-5 py-8 text-center text-sm text-slate-500">Belum ada pelanggan</td>
-                                    </tr>
+                                    <template x-if="topCustomers.length > 0">
+                                        <template x-for="(customer, idx) in topCustomers" :key="idx">
+                                            <tr class="hover:bg-slate-50 transition-colors">
+                                                <td class="px-4 py-3 text-sm font-medium text-slate-900 truncate max-w-[120px]" x-text="customer.name"></td>
+                                                <td class="px-4 py-3 text-sm text-slate-600 truncate" x-text="customer.transaction_count + ' kali'"></td>
+                                                <td class="px-4 py-3 text-sm text-slate-900 font-medium" x-text="formatRupiah(customer.total_spend)"></td>
+                                            </tr>
+                                        </template>
+                                    </template>
+                                    <template x-if="topCustomers.length === 0">
+                                        <tr>
+                                            <td colspan="3" class="px-5 py-8 text-center text-sm text-slate-500">Belum ada pelanggan</td>
+                                        </tr>
+                                    </template>
                                 </tbody>
                             </table>
                         </div>

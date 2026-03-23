@@ -45,3 +45,7 @@ Selesai: 17 Maret 2026
 US-013 TransaksiPelanggan
 Mulai: 18 Maret 2026
 Selesai: 18 Maret 2026
+
+US-007 LaporanHarian
+Mulai: 19 Maret 2026
+Selesai: 23 Maret 2026

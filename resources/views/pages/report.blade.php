@@ -142,7 +142,18 @@
                             <p class="text-xs text-slate-500 mt-1">Ringkasan periode ini</p>
                         </div>
                         <div class="p-5 flex-1 lg:relative rounded-b-lg">
-                            
+                            <div class="lg:absolute lg:inset-0 p-5 lg:overflow-y-auto custom-scrollbar">
+                                <div class="text-sm text-slate-700 h-max" x-show="insightList.length > 0">
+                                    <template x-for="(insight, idx) in insightList" :key="idx">
+                                        <div class="py-3" :class="{'pt-0': idx === 0, 'pb-0': idx === insightList.length - 1, 'border-t border-slate-100': idx > 0}">
+                                            <p class="leading-relaxed" x-text="insight"></p>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div x-show="insightList.length === 0" class="text-center py-4 text-slate-400">
+                                    <p>Belum ada data untuk dianalisis</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

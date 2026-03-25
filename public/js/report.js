@@ -15,12 +15,17 @@ function reportPage() {
         chartData: [],
         expenseChartData: [],
         chartDates: [],
-
         topProducts: [],
         topExpenses: [],
         topCustomers: [],
         cashierSummary: [],
-
+        insights: {
+            salesComparison: null,
+            expenseInsight: null,
+            topProductInsight: null,
+            leastProductInsight: null,
+            peakHourInsight: null,
+        },
         chartInstance: null,
 
         months: [
@@ -60,6 +65,7 @@ function reportPage() {
                 this.topExpenses = data.topExpenses;
                 this.topCustomers = data.topCustomers;
                 this.cashierSummary = data.cashierSummary;
+                this.insights = data.insights ?? {};
 
 
                 this.$nextTick(() => this.initChart());
@@ -167,6 +173,10 @@ function reportPage() {
                 }
             });
         },
+        get insightList() {
+            return Object.values(this.insights).filter(v => v !== null && v !== undefined && v !== '');
+        },
+
         get selectedCashierName() {
             const select = document.querySelector('select[x-model="selectedCashier"]')
             if (!select) return ''

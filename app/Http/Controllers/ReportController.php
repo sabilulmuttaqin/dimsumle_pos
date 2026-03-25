@@ -57,6 +57,12 @@ class ReportController extends Controller
                     'transaction_count' => $customer->transaction_count,
                     'total_spend'       => $customer->total_spend,
                 ])->values(),
+            'insights'     => $this->generateInsights(
+                compact('month', 'year', 'cashier', 'start', 'end'),
+                $metrics['totalSales'],
+                $metrics['totalTransactions'],
+                $expenses['totalExpenses']
+            ),
         ]);
     }
 
@@ -162,5 +168,107 @@ class ReportController extends Controller
             DB::raw('COUNT(pos.id) as transaction_count'),
             DB::raw('SUM(pos.total) as total_spend')
         )->groupBy('customers.id', 'customers.name')->orderByDesc('transaction_count')->limit(5)->get();
+    }
+
+    private function generateInsights($reportContext, $totalSales, $totalTransactions, $totalExpenses)
+    {
+        if ($totalTransactions === 0) {
+            return [];
+        }
+
+        ['month' => $month, 'year' => $year, 'cashier' => $cashier, 'start' => $start, 'end' => $end]
+            = $reportContext;
+        $formatRupiah = fn($number) => number_format($number, 0, ',', '.');
+        $insights     = [];
+
+        $previousDate     = Carbon::create($year, $month, 1)->subMonth();
+        $previousSales    = $this->getPreviousPeriodSales($year, $month, $cashier);
+        $previousExpenses = $this->getPreviousPeriodExpenses($year, $month, $cashier);
+        $previousLabel    = DateHelper::getMonthName($previousDate->month) . ' ' . $previousDate->year;
+
+        if ($previousSales > 0 && $totalSales > 0) {
+            $percentChange = (($totalSales - $previousSales) / $previousSales) * 100;
+            $trend         = $percentChange > 0 ? 'meningkat' : 'menurun';
+            $insights['salesComparison'] = "Perbandingan Omzet: " . ucfirst($trend) .
+                " {$formatRupiah(abs($percentChange))}% dari {$previousLabel}" .
+                " (Rp {$formatRupiah($previousSales)} → Rp {$formatRupiah($totalSales)})";
+        } elseif ($totalSales > 0) {
+            $insights['salesComparison'] = "Perbandingan Omzet: Tidak ada data pada {$previousLabel}";
+        }
+
+        if ($peakHour = $this->getPeakHourWithDay($start, $end, $cashier)) {
+            $insights['peakHourInsight'] = sprintf(
+                "Jam ramai: %s pukul %s:00 WIB (%d transaksi)",
+                DateHelper::getMySQLDayName($peakHour->day_index),
+                str_pad($peakHour->hour, 2, '0', STR_PAD_LEFT),
+                $peakHour->transaction_count
+            );
+        }
+        $profit = $totalSales - $totalExpenses;
+        $prevProfit = $previousSales - $previousExpenses;
+        if ($profit > 0) {
+            $trend = $profit > $prevProfit ? 'naik' : 'turun';
+            $diff = abs($profit - $prevProfit);
+            $insights['profitInsight'] = sprintf(
+                "Profit: Profit %s dari bulan lalu sebesar Rp %s",
+                $trend,
+                $formatRupiah($diff)
+            );
+        }
+
+        return $insights;
+    }
+    private function getPreviousPeriodSales($year, $month, $cashier)
+    {
+        $previousMonth = Carbon::create($year, $month, 1)->subMonth();
+        return $this->withCashier(
+            POS::whereBetween('updated_at', [
+                $previousMonth->copy()->startOfMonth(),
+                $previousMonth->copy()->endOfMonth(),
+            ]),
+            $cashier
+        )->sum('total');
+    }
+
+    private function getPreviousPeriodExpenses($year, $month, $cashier)
+    {
+        $previousMonth = Carbon::create($year, $month, 1)->subMonth();
+        return $this->withCashier(
+            Expense::whereBetween('expense_date', [
+                $previousMonth->copy()->startOfMonth(),
+                $previousMonth->copy()->endOfMonth(),
+            ]),
+            $cashier
+        )->sum('amount');
+    }
+
+    private function getPeakHourWithDay($start, $end, $cashier)
+    {
+        $query = $this->withCashier(POS::whereBetween('updated_at', [$start, $end]), $cashier);
+
+        if (config('database.default') === 'sqlite') {
+            $transactions = $query->get();
+            if ($transactions->isEmpty()) {
+                return null;
+            }
+
+            $peakGroup = $transactions
+                ->groupBy(fn($transaction) => ($transaction->updated_at->dayOfWeekIso - 1) . '-' . $transaction->updated_at->hour)
+                ->sortByDesc(fn($group) => $group->count())
+                ->first();
+            $firstTransaction = $peakGroup->first();
+
+            return (object) [
+                'day_index'         => $firstTransaction->updated_at->dayOfWeekIso - 1,
+                'hour'              => $firstTransaction->updated_at->hour,
+                'transaction_count' => $peakGroup->count(),
+            ];
+        }
+
+        return $query
+            ->selectRaw('WEEKDAY(updated_at) as day_index, HOUR(updated_at) as hour, COUNT(*) as transaction_count')
+            ->groupBy('day_index', 'hour')
+            ->orderByDesc('transaction_count')
+            ->first();
     }
 }

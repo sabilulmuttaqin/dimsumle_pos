@@ -50,7 +50,9 @@ US-007 LaporanHarian
 Mulai: 19 Maret 2026
 Selesai: 23 Maret 2026
 
-
 US-010 RingkasanTeks
 Mulai: 24 Maret 2026
 Selesai: 25 Maret 2026
+
+--- Demo owner 26 Maret 2026 ---
+Projek Selesai.
